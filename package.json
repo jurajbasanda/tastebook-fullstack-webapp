@@ -1,0 +1,19 @@
+{
+  "name": "tastebook-website",
+  "version": "1.0.0",
+  "description": "full stack tastebook  webapp",
+  "proxy": "http://127.0.0.1:5000",
+  "main": "./backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client \""
+  },
+  "author": "Juraj Basanda",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "react-loader-spinner": "^4.0.0"
+  }
+}
