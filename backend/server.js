@@ -7,7 +7,7 @@ import recipe from './Routes/recipe.js'
 dotenv.config()
 connectDB()
 const app = express()
-
+//Middleware
 app.use(express.json())
 
 app.get('/', (req, res) => {
