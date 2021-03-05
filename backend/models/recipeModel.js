@@ -14,6 +14,7 @@ const reviewSchema = mongoose.Schema(
 )
 const RecipeSchema = mongoose.Schema({
 	title: { type: String, required: true },
+	keywords: { type: String, required: true },
 	prepTime: { type: Number, required: true },
 	calories: { type: Number, required: true },
 	serving: { type: Number, required: true, default: 1 },

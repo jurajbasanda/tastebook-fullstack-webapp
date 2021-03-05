@@ -3,8 +3,13 @@ import Recipe from '../models/recipeModel.js'
 const router = express.Router()
 //Get/recipes show all recipes
 router.get('/', async (req, res) => {
+	const keyword = req.query.keyword
+		? {
+				keywords: { $regex: req.query.keyword, $options: 'i' },
+		  }
+		: {}
 	try {
-		const recipes = await Recipe.find()
+		const recipes = await Recipe.find({ ...keyword })
 		res.json(recipes)
 	} catch (err) {
 		res.json({ message: err })
@@ -34,13 +39,12 @@ router.delete('/:id', async (req, res) => {
 //Update/recipe/:id update specific post
 router.patch('/:id', async (req, res) => {
 	try {
-		const updateRecipe = await Recipe.updateOne({ _id: req.params.id },{})
+		const updateRecipe = await Recipe.updateOne({ _id: req.params.id }, {})
 		res.json(updateRecipe)
 	} catch (err) {
 		res.status(404).json({ message: err })
 		console.error('There was a error')
 	}
-
 })
 //Post/recepis create new recipe
 router.post('/', (req, res) => {
