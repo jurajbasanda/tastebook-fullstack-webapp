@@ -37,7 +37,7 @@ router.patch('/:id', async (req, res) => {
 		const updateRecipe = await Recipe.updateOne({ _id: req.params.id },{})
 		res.json(updateRecipe)
 	} catch (err) {
-		res.json({ message: err })
+		res.status(404).json({ message: err })
 		console.error('There was a error')
 	}
 
