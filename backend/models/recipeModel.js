@@ -26,22 +26,22 @@ const RecipeSchema = mongoose.Schema({
 	hot: { type: Boolean, required: true, default: false },
 	img: { type: Array, required: true },
 	date: { type: Date, default: Date.now },
-	submitedBy: {
-		firstName: { type: String, required: true },
-		lastName: { type: String, required: true },
-		email: { type: String, required: true },
-	},
-	reviews: [reviewSchema],
-	rating: {
-		type: Number,
-		required: true,
-		default: 0,
-	},
-	numReviews: {
-		type: Number,
-		required: true,
-		default: 0,
-	},
+	// submitedBy: {
+	// 	firstName: { type: String, required: true },
+	// 	lastName: { type: String, required: true },
+	// 	email: { type: String, required: true },
+	// },
+	// reviews: [reviewSchema],
+	// rating: {
+	// 	type: Number,
+	// 	required: true,
+	// 	default: 0,
+	// },
+	// numReviews: {
+	// 	type: Number,
+	// 	required: true,
+	// 	default: 0,
+	// },
 })
 
 const Recipe = mongoose.model('Recipe', RecipeSchema)

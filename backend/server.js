@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import connectDB from './config/configDB.js'
 import recipe from './Routes/recipe.js'
+import user from './Routes/user.js'
 
 dotenv.config()
 connectDB()
@@ -13,7 +14,8 @@ app.use(express.json())
 app.get('/', (req, res) => {
 	res.send('Home screen')
 })
-app.use('/recipes', recipe)
+app.use('/api/recipes', recipe)
+app.use('/api/users',user)
 //Set PORT
 const PORT = process.env.PORT || 5000
 //Start server
