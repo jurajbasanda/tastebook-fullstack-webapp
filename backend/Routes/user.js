@@ -9,6 +9,12 @@ router.get('/register', (req, res) => {
 //api/users/register => Auth user & get token
 router.post('/register', async (req, res) => {
 	const { firstName, lastName, email, password } = req.body
+	const userExists = await User.findOne({ email })
+
+	if (userExists) {
+		res.status(400).send('User already exists')
+		throw new Error('User already exists')
+	}
 	const user = new User({
 		firstName: firstName,
 		lastName: lastName,
@@ -17,7 +23,7 @@ router.post('/register', async (req, res) => {
 	})
 	try {
 		const savedUser = await user.save()
-        res.status(200)
+		res.status(200)
 		res.send(savedUser)
 	} catch (err) {
 		res.status(400).send(err)
