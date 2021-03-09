@@ -32,6 +32,7 @@ router.post('/register', async (req, res) => {
 //api/users/login => Auth user & get token
 router.post('/login', async (req, res) => {
 	const { email, password } = req.body
+
 	//Checking if email of the user exists
 	const user = await User.findOne({ email })
 	if (!user) {
