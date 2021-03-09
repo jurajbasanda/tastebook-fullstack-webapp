@@ -1,6 +1,8 @@
 import express from 'express'
 import Recipe from '../models/recipeModel.js'
+import protect from '../middleware/verifyToken.js'
 const router = express.Router()
+
 //Get/recipes => show all recipes
 router.get('/', async (req, res) => {
 	const keyword = req.query.keyword
@@ -36,7 +38,7 @@ router.delete('/:id', async (req, res) => {
 		console.error('There was a error')
 	}
 })
-//Update/recipe/:id => update specific post
+//Update/recipes/:id => update specific post
 router.patch('/:id', async (req, res) => {
 	try {
 		const updateRecipe = await Recipe.updateOne({ _id: req.params.id }, {})
@@ -46,19 +48,19 @@ router.patch('/:id', async (req, res) => {
 		console.error('There was a error')
 	}
 })
-//Post/recepis => create new recipe
-router.post('/', (req, res) => {
+//Post/recipes => create new recipe
+router.post('/', protect, (req, res) => {
 	const addRecipe = new Recipe({
 		title: req.body.title,
-		keywords:req.body.keywords,
-		prepTime: req.body.prepTime,
-		calories: req.body.calories,
-		meat: req.body.meat,
-		description: req.body.description,
-		vegeterian: req.body.vegeterian,
-		glutenFree: req.body.glutenFree,
-		hot: req.body.hot,
-		img: req.body.img,
+		// keywords:req.body.keywords,
+		// prepTime: req.body.prepTime,
+		// calories: req.body.calories,
+		// meat: req.body.meat,
+		// description: req.body.description,
+		// vegeterian: req.body.vegeterian,
+		// glutenFree: req.body.glutenFree,
+		// hot: req.body.hot,
+		// img: req.body.img,
 	})
 	addRecipe
 		.save()
