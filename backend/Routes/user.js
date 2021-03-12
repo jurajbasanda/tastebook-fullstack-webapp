@@ -37,34 +37,29 @@ router.post('/login', async (req, res) => {
 	//Checking if email of the user exists
 	const user = await User.findOne({ email })
 	if (!user) {
-		res.status(400).send('Email do not mach')
+		res.status(400).json('Email do not mach')
 		throw new Error('Email do not mach')
 	}
 	if (user && (await user.matchPassword(password))) {
 		const token = generateToken(user._id)
 		res.status(200).header('auth-token', token).send(token)
 	} else {
-		res.status(400).send('Invalid password ')
+		res.status(400).json('Invalid password ')
 	}
 })
 
 //api/users/:id => Auth user & get user information
 router.get('/profile/', protect, async (req, res) => {
-	const { _id, firstName, lastName, email, password } = req.user
-	const user = await User.findOne(_id)
+	const user = await User.findById(req.user.id)
 	if (user) {
-		res
-			.status(200)
-			.json({
-				_id: user._id,
-				firstName: firstName,
-				lastName: lastName,
-				email: user.email,
-			})
-	}
-	else{
-		res.status(404)
-		throw new Error('User not found')
+		res.status(200).json({
+			_id: user._id,
+			firstName: user.firstName,
+			lastName: user.lastName,
+			email: user.email,
+		})
+	} else {
+		res.status(404).json('User not found')
 	}
 })
 
