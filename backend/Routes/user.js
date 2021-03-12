@@ -1,6 +1,7 @@
 import express from 'express'
 import User from '../models/userModel.js'
 import generateToken from '../utils/generateToken.js'
+import protect from '../middleware/verifyToken.js'
 
 const router = express.Router()
 
@@ -44,6 +45,26 @@ router.post('/login', async (req, res) => {
 		res.status(200).header('auth-token', token).send(token)
 	} else {
 		res.status(400).send('Invalid password ')
+	}
+})
+
+//api/users/:id => Auth user & get user information
+router.get('/profile/', protect, async (req, res) => {
+	const { _id, firstName, lastName, email, password } = req.user
+	const user = await User.findOne(_id)
+	if (user) {
+		res
+			.status(200)
+			.json({
+				_id: user._id,
+				firstName: firstName,
+				lastName: lastName,
+				email: user.email,
+			})
+	}
+	else{
+		res.status(404)
+		throw new Error('User not found')
 	}
 })
 
