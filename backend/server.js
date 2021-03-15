@@ -12,10 +12,10 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
-	res.send('Home screen')
+	res.send('Home screen of server')
 })
 app.use('/api/recipes', recipe)
-app.use('/api/users',user)
+app.use('/api/users', user)
 //Set PORT
 const PORT = process.env.PORT || 5000
 //Start server
