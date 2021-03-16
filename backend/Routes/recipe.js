@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 		res.json(recipes)
 	} catch (err) {
 		res.json({ message: err })
-		console.error('There was a error')
+		console.error('There was a error, show all')
 	}
 })
 //Get/recipes/:id => show one specific recipe
@@ -25,7 +25,17 @@ router.get('/:id', async (req, res) => {
 		res.json(oneRecipe)
 	} catch (err) {
 		res.json({ message: err })
-		console.error('There was a error')
+		console.error('There was a error, show one')
+	}
+})
+//*Get/recipes/user => show user recipes
+router.get('/user/all', async (req, res) => {
+	try {
+		const userRecipes = await Recipe.findById(req.body.user)
+		res.json(userRecipes).status(200)
+	} catch (err) {
+		res.json({ message: err }).status(400)
+		console.log('There was a error, show user all')
 	}
 })
 //Delete/recipes/:id => delete specific recipe
@@ -52,6 +62,7 @@ router.patch('/:id', async (req, res) => {
 router.post('/', protect, (req, res) => {
 	const addRecipe = new Recipe({
 		title: req.body.title,
+		userId: req.body.userId,
 		// keywords:req.body.keywords,
 		// prepTime: req.body.prepTime,
 		// calories: req.body.calories,

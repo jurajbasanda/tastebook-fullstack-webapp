@@ -26,6 +26,7 @@ const RecipeSchema = mongoose.Schema({
 	// hot: { type: Boolean, required: true, default: false },
 	// img: { type: Array, required: true },
 	date: { type: Date, default: Date.now },
+	userId: { type: mongoose.Schema.Types.ObjectId, required: true },
 	// submitedBy: {
 	// 	firstName: { type: String, required: true },
 	// 	lastName: { type: String, required: true },
