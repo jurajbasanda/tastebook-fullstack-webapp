@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
 //*Get/recipes/user => show user recipes
 router.get('/user/all', async (req, res) => {
 	try {
-		const userRecipes = await Recipe.findById(req.body.user)
+		const userRecipes = await Recipe.find({ userId: req.body.userId })
 		res.json(userRecipes).status(200)
 	} catch (err) {
 		res.json({ message: err }).status(400)
