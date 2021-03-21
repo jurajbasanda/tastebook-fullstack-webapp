@@ -30,9 +30,13 @@ router.get('/:id', async (req, res) => {
 })
 //*Get/recipes/user => show user recipes
 router.get('/user/all', async (req, res) => {
+	const { userid } = req.headers
 	try {
-		const userRecipes = await Recipe.find({ userId: req.body.userId })
+		const userRecipes = await Recipe.find({ userId: userid })
 		res.json(userRecipes).status(200)
+		console.log('Got it')
+		console.log(userRecipes)
+		console.log(req.headers)
 	} catch (err) {
 		res.json({ message: err }).status(400)
 		console.log('There was a error, show user all')
