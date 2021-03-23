@@ -34,12 +34,8 @@ router.get('/user/all', async (req, res) => {
 	try {
 		const userRecipes = await Recipe.find({ userId: userid })
 		res.json(userRecipes).status(200)
-		console.log('Got it')
-		console.log(userRecipes)
-		console.log(req.headers)
 	} catch (err) {
 		res.json({ message: err }).status(400)
-		console.log('There was a error, show user all')
 	}
 })
 //Delete/recipes/:id => delete specific recipe
