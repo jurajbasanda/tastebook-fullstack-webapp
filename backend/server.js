@@ -4,6 +4,7 @@ import colors from 'colors'
 import connectDB from './config/configDB.js'
 import recipe from './Routes/recipe.js'
 import user from './Routes/user.js'
+import upload from './Routes/upload.js'
 
 dotenv.config()
 connectDB()
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 })
 app.use('/api/recipes', recipe)
 app.use('/api/users', user)
+app.use('/api/upload', upload)
 //Set PORT
 const PORT = process.env.PORT || 5000
 //Start server
