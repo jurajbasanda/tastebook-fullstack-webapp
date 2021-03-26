@@ -62,16 +62,17 @@ router.patch('/:id', async (req, res) => {
 router.post('/', protect, (req, res) => {
 	const addRecipe = new Recipe({
 		title: req.body.title,
-		userId: req.body.userId,
+		userId: req.header.userId,
 		// keywords:req.body.keywords,
 		// prepTime: req.body.prepTime,
 		// calories: req.body.calories,
 		// meat: req.body.meat,
-		// description: req.body.description,
+		ingredients: req.body.ingredients,
+		directions: req.body.directions,
 		// vegeterian: req.body.vegeterian,
 		// glutenFree: req.body.glutenFree,
 		// hot: req.body.hot,
-		// img: req.body.img,
+		img: req.body.img,
 	})
 	addRecipe
 		.save()
