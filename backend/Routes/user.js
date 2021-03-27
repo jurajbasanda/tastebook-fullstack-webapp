@@ -40,6 +40,7 @@ router.post('/login', async (req, res) => {
 		res.status(400).json('Email do not mach')
 		throw new Error('Email do not mach')
 	}
+	//Chceck password
 	if (user && (await user.matchPassword(password))) {
 		const token = generateToken(user._id)
 		res.status(200).header('auth-token', token).send(token)
@@ -48,7 +49,7 @@ router.post('/login', async (req, res) => {
 	}
 })
 
-//api/users/:id => Auth user & get user information
+//api/users/profile => Auth user & get user information
 router.get('/profile/', protect, async (req, res) => {
 	const user = await User.findById(req.user.id)
 	if (user) {
