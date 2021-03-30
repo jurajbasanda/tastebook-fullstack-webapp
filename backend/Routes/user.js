@@ -46,6 +46,7 @@ router.post('/login', async (req, res) => {
 		res.status(200).header('auth-token', token).send(token)
 	} else {
 		res.status(400).json('Invalid password ')
+		throw new Error('Invalid password')
 	}
 })
 
