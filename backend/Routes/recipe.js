@@ -41,7 +41,8 @@ router.get('/user/all', async (req, res) => {
 //Delete/recipes/:id => delete specific recipe
 router.delete('/:id', async (req, res) => {
 	try {
-		const removedRecipe = await Recipe.remove({ _id: req.params.id })
+		const removedRecipe = await Recipe.deleteOne({ _id: req.params.id })
+		console.log('Recipe removed')
 		res.json(removedRecipe)
 	} catch (err) {
 		res.json({ message: err })
